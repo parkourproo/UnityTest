@@ -90,7 +90,6 @@ public class BufferController : MonoBehaviour
     IEnumerator ScaleDownItem(Transform itemTransform, float duration, float delay, int id)
     {
         //Debug.Log(id);
-        // các item biến mất cách nhau 1 thời gian bằng delay giây
         yield return new WaitForSeconds(delay);
 
         Vector3 originalScale = itemTransform.localScale;

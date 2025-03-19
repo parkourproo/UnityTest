@@ -112,7 +112,6 @@ public class Board
 
     internal void Fill()
     {
-        // Danh sách tất cả ô trống trên board
         List<Cell> emptyCells = new List<Cell>();
         for (int x = 0; x < boardSizeX; x++)
         {
@@ -126,10 +125,8 @@ public class Board
 
         for (int i = 0; i < groupCount; i++)
         {
-            // Random 1 loại item cho nhóm này
             NormalItem.eNormalType randomType = Utils.GetRandomNormalType();
 
-            // Chọn ngẫu nhiên 3 ô từ danh sách ô trống
             List<Cell> selectedCells = new List<Cell>();
             for (int j = 0; j < 3; j++)
             {
@@ -186,16 +183,14 @@ public class Board
 
     public List<Cell> FindSetOfThree()
     {
-        // Tạo dictionary để nhóm các item theo loại
         Dictionary<NormalItem.eNormalType, List<Cell>> itemGroups = new Dictionary<NormalItem.eNormalType, List<Cell>>();
 
-        // Duyệt qua tất cả các ô trên bảng
         for (int x = 0; x < boardSizeX; x++)
         {
             for (int y = 0; y < boardSizeY; y++)
             {
                 Cell cell = m_cells[x, y];
-                if (cell.Item != null && cell.Item is NormalItem) // Kiểm tra ô có item không
+                if (cell.Item != null && cell.Item is NormalItem)
                 {
                     NormalItem item = (NormalItem)cell.Item;
                     if (!itemGroups.ContainsKey(item.ItemType))
@@ -207,17 +202,13 @@ public class Board
             }
         }
 
-        // Tìm nhóm có ít nhất 3 item
         foreach (var group in itemGroups)
         {
             if (group.Value.Count >= 3)
             {
-                // Trả về 3 ô đầu tiên của nhóm
                 return group.Value.Take(3).ToList();
             }
         }
-
-        // Nếu không tìm thấy bộ ba nào
         return null;
     }
 }
